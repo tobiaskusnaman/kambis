@@ -1,6 +1,6 @@
 <template lang="html">
   <section>
-    <b-collapse class="card" v-for="log in backlog" style="margin-bottom:20px;">
+    <b-collapse class="card" v-for="log in backLog" :style="styleMargin">
         <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
                 {{log.task}}
@@ -19,8 +19,8 @@
             </div>
         </div>
         <footer class="card-footer">
-            <a class="card-footer-item">Delete</a>
-            <a class="card-footer-item" @click="submitBackLog(log.key)">To-Do</a>
+            <a class="card-footer-item" @click="deleteBackLog(log)">Delete</a>
+            <a class="card-footer-item" @click="submitBackLog(log)">To-Do</a>
         </footer>
     </b-collapse>
   </section>
@@ -32,13 +32,29 @@ import { mapGetters } from 'vuex'
 export default {
   data: function () {
     return {
-      marginCard: '20px'
+      styleMargin: {
+        'margin-bottom': '20px'
+      }
+    }
+  },
+  methods: {
+    submitBackLog (task) {
+      let moveTodo = {
+        assign: task.assign,
+        task: task.task,
+        point: task.point
+      }
+      this.$db.ref(`todo/${task.key}`).set(moveTodo)
+      this.$db.ref(`backLog/${task.key}`).remove()
+    },
+    deleteBackLog (task) {
+      this.$db.ref(`backLog/${task.key}`).remove()
     }
   },
   computed: {
-    ...mapGetters({
-      backlog: 'getBackLog'
-    })
+    backLog () {
+      return this.$store.state.backLog
+    }
   }
 }
 </script>

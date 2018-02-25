@@ -1,9 +1,9 @@
 <template lang="html">
   <section>
-    <b-collapse class="card">
+    <b-collapse class="card" v-for="doing in doings" :style="styleMargin">
         <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">
-                Component
+                {{doing.task}}
             </p>
             <a class="card-header-icon">
                 <b-icon
@@ -13,14 +13,14 @@
         </div>
         <div class="card-content">
             <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                <a>#buefy</a>.
+              assign to : {{doing.assign}}
+              <br>
+              point : {{doing.point}}
             </div>
         </div>
         <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
+            <a class="card-footer-item" @click='moveToTodo(doing)'>To-Do</a>
+            <a class="card-footer-item" @click='moveToDone(doing)'>Done</a>
         </footer>
     </b-collapse>
   </section>
@@ -28,6 +28,38 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+      styleMargin: {
+        'margin-bottom': '20px'
+      }
+    }
+  },
+  methods: {
+    moveToTodo (task) {
+      let move = {
+        assign: task.assign,
+        task: task.task,
+        point: task.point
+      }
+      this.$db.ref(`todo/${task.key}`).set(move)
+      this.$db.ref(`doing/${task.key}`).remove()
+    },
+    moveToDone (task) {
+      let move = {
+        assign: task.assign,
+        task: task.task,
+        point: task.point
+      }
+      this.$db.ref(`done/${task.key}`).set(move)
+      this.$db.ref(`doing/${task.key}`).remove()
+    }
+  },
+  computed: {
+    doings () {
+      return this.$store.state.doing
+    }
+  }
 }
 </script>
 
