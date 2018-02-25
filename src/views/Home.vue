@@ -3,6 +3,7 @@
     <div class="content">
       <div class="container">
         <h1>INI KANBAN</h1>
+        <button class="button" name="button" @click="addTask">Add</button>
         <div class="columns">
           <div class="column">
             <section>
@@ -46,6 +47,7 @@ import BackLog from '@/components/BackLog.vue'
 import ToDo from '@/components/ToDo.vue'
 import Doing from '@/components/Doing.vue'
 import Done from '@/components/Done.vue'
+import AddTask from '@/components/AddTask.vue'
 
 export default {
   name: 'home',
@@ -53,9 +55,15 @@ export default {
     BackLog,
     ToDo,
     Doing,
-    Done
+    Done,
+    AddTask
   },
   methods: {
+    addTask () {
+      this.$modal.open({
+        component: AddTask
+      })
+    },
     convertData (dataFireBase) {
       let arr = Object.entries(dataFireBase).map(e => Object.assign({ key: e[0] }, e[1]))
       return arr
@@ -124,6 +132,7 @@ export default {
     // }
   },
   created: function () {
+    console.log(this);
     this.getBackLog()
     this.getToDo()
     this.getDoing()

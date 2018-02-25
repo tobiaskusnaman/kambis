@@ -8,7 +8,8 @@ export default new Vuex.Store({
     backLog: null,
     toDo: null,
     doing: null,
-    done: null
+    done: null,
+    test: null
   },
   getters: {
     getBackLog: state => {
@@ -27,6 +28,12 @@ export default new Vuex.Store({
     },
     setDone (state, payload) {
       state.done = payload
+    },
+    addBackLog (state, payload) {
+      console.log('VUEX')
+      // state.test = payload
+      // console.log('INI DI VUEX',payload);
+      // state.backLog.push(payload)
     }
   },
   actions: {
