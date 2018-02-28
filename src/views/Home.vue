@@ -3,12 +3,12 @@
     <div class="content">
       <div class="container">
         <h1>INI KANBAN</h1>
-        <button class="button" name="button" @click="getModal">Add</button>
+        <button class="button" name="button" @click="getModal" style='margin:10px'>Add Task</button>
         <div class="columns">
           <div class="column">
             <section>
               <b-collapse class="card">
-                  <div slot="trigger" slot-scope="props" class="card-header">
+                  <div slot="trigger" slot-scope="props" class="card-header" style="background-color:#7F8D25">
                       <p class="card-header-title">
                           Back-Log
                       </p>
@@ -30,7 +30,7 @@
           <div class="column">
             <section>
               <b-collapse class="card">
-                  <div slot="trigger" slot-scope="props" class="card-header">
+                  <div slot="trigger" slot-scope="props" class="card-header" style="background-color:#B8C264">
                       <p class="card-header-title">
                           To-Do
                       </p>
@@ -52,7 +52,7 @@
           <div class="column">
             <section>
               <b-collapse class="card">
-                  <div slot="trigger" slot-scope="props" class="card-header">
+                  <div slot="trigger" slot-scope="props" class="card-header" style="background-color:#F1E49B">
                       <p class="card-header-title">
                           Doing
                       </p>
@@ -74,7 +74,7 @@
           <div class="column">
             <section>
               <b-collapse class="card">
-                  <div slot="trigger" slot-scope="props" class="card-header">
+                  <div slot="trigger" slot-scope="props" class="card-header" style="background-color:#DE5D3C">
                       <p class="card-header-title">
                           Done
                       </p>

@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     addTask () {
-      console.log('-----------');
       let newbacklog = {
         assign: this.assign,
         point: this.point,
@@ -64,19 +63,6 @@ export default {
       }
       var newPostKey = this.$db.ref('backlog').push().key
       newbacklog.key = newPostKey
-      console.log('DISNI',this.$parent);
-      // console.log(this.$parent);
-      // console.log(this.$parent);
-      // this.$db.ref(`backlog/${newPostKey}`).set(newbacklog)
-
-
-      // console.log(newPostKey);
-
-      console.log(newbacklog);
-      // console.log(newbacklog);
-      // this.$store.commit('addTask', newbacklog)
-      // this.$parent.close()
-
     }
   }
 }
